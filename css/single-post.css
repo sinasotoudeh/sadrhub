@@ -1,0 +1,619 @@
+/*
+Sadrhub
+Author: Sina Sotoudeh
+Website: sinasotoudeh.ir
+github: github.com/sinasotoudeh
+*/
+/* =========================================
+   1. متغیرها و تنظیمات پایه
+   ========================================= */
+:root {
+    --c-primary: #4f46e5;
+    /* بنفش/آبی برند کاتلاس */
+    --c-secondary: #ec4899;
+    /* صورتی برای گرادینت */
+    --c-dark: #1e293b;
+    --c-text: #475569;
+    --c-light: #f1f5f9;
+    --c-border: #e2e8f0;
+    --c-white: #ffffff;
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --shadow-card: 0 10px 40px -10px rgba(0, 0, 0, 0.08);
+    --shadow-hover: 0 20px 50px -10px rgba(0, 0, 0, 0.12);
+}
+
+/* نوار پیشرفت */
+#cuttlas-scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--c-primary), var(--c-secondary));
+    width: 0%;
+    z-index: 99999;
+    border-radius: 0 2px 2px 0;
+}
+
+/* =========================================
+   2. پس‌زمینه متحرک (BLOBS) - فیکس شده
+   ========================================= */
+.cuttlas-fixed-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: -1;
+    /* زیر همه چیز */
+    background-color: #f8fafc;
+    /* رنگ پایه خیلی روشن */
+    overflow: hidden;
+    pointer-events: none;
+}
+
+/* استایل بلاب‌ها (همان کدهای قبلی شما + تنظیمات پوزیشن) */
+.gradient-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.6;
+    animation: blob-bounce 20s infinite ease-in-out alternate;
+}
+
+/* =========================================
+   3. لی‌آوت و ساختار اصلی
+   ========================================= */
+.cuttlas-single-wrapper {
+    position: relative;
+    z-index: 1;
+    padding: 40px 0 80px;
+}
+
+.cuttlas-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+
+
+/* کلاس عمومی کارت سفید */
+.cuttlas-card {
+    background: var(--c-white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    padding: 40px;
+    margin-bottom: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    /* افکت شیشه‌ای خیلی محو */
+}
+
+/* =========================================
+   4. تصویر شاخص (Hero)
+   ========================================= */
+.cuttlas-hero-image {
+    width: 100%;
+    height: 450px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    /* تکنیک همپوشانی: تصویر زیر کارت مقاله می‌رود */
+    position: relative;
+    z-index: 1;
+    box-shadow: var(--shadow-card);
+}
+
+.cuttlas-hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* =========================================
+   5. استایل مقاله (Article)
+   ========================================= */
+.cuttlas-article-card {
+    position: relative;
+    z-index: 2;
+    /* بالاتر از تصویر شاخص */
+    margin-top: 0;
+}
+
+/* هدر پست */
+.cuttlas-post-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid var(--c-border);
+}
+
+.post-meta-badges {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 15px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.meta-cat a {
+    background: #e0e7ff;
+    color: var(--c-primary);
+    padding: 4px 12px;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.meta-cat a:hover {
+    background: var(--c-primary);
+    color: #fff;
+}
+
+.meta-time {
+    color: #94a3b8;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.post-title {
+    font-size: 2.2rem;
+    line-height: 1.4;
+    color: var(--c-dark);
+    margin: 0 0 25px;
+    font-weight: 800;
+}
+
+.post-author-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-align: right;
+}
+
+.post-author-row img {
+    border-radius: 50%;
+    border: 2px solid var(--c-light);
+}
+
+.author-details {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.9rem;
+}
+
+.byline strong {
+    color: var(--c-dark);
+}
+
+.posted-on {
+    color: #94a3b8;
+    font-size: 0.8rem;
+    margin-top: 2px;
+}
+
+/* متن مقاله */
+.cuttlas-entry-content {
+    font-size: 1.125rem;
+    /* 18px */
+    line-height: 1.9;
+    color: var(--c-text);
+}
+
+.cuttlas-entry-content p {
+    margin-bottom: 24px;
+}
+
+.cuttlas-entry-content h2 {
+    font-size: 1.75rem;
+    color: var(--c-dark);
+    margin: 50px 0 20px;
+    font-weight: 700;
+    position: relative;
+    padding-right: 15px;
+}
+
+.cuttlas-entry-content h2::before {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 8px;
+    bottom: 8px;
+    width: 4px;
+    background: var(--c-primary);
+    border-radius: 4px;
+}
+
+.cuttlas-entry-content img {
+    border-radius: var(--radius-md);
+    max-width: 100%;
+    height: auto;
+    margin: 30px 0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.cuttlas-entry-content blockquote {
+    background: linear-gradient(to left, #f8fafc, #fff);
+    border-right: 4px solid var(--c-secondary);
+    padding: 25px;
+    margin: 35px 0;
+    font-style: italic;
+    color: var(--c-dark);
+    border-radius: 8px;
+}
+
+/* تگ‌ها */
+.cuttlas-entry-footer {
+    margin-top: 50px;
+    padding-top: 20px;
+    border-top: 1px dashed var(--c-border);
+}
+
+.tags-list a {
+    display: inline-block;
+    background: var(--c-light);
+    color: var(--c-text);
+    padding: 6px 14px;
+    border-radius: 8px;
+    margin-left: 10px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: 0.2s;
+}
+
+.tags-list a:hover {
+    background: var(--c-dark);
+    color: #fff;
+}
+
+.tag-label {
+    color: var(--c-secondary);
+    margin-left: 2px;
+}
+
+/* =========================================
+   6. باکس نویسنده (Author Box)
+   ========================================= */
+.cuttlas-author-box {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.author-box-img img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border: 4px solid var(--c-light);
+}
+
+.author-box-content h4 {
+    margin: 0 0 10px;
+    font-size: 1.3rem;
+    color: var(--c-dark);
+}
+
+.author-box-content p {
+    font-size: 0.95rem;
+    color: var(--c-text);
+    margin-bottom: 15px;
+}
+
+.btn-text {
+    color: var(--c-primary);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.btn-text:hover {
+    text-decoration: underline;
+}
+
+/* =========================================
+   7. مطالب مرتبط
+   ========================================= */
+.section-heading {
+    font-size: 1.2rem;
+    color: var(--c-dark);
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+
+.related-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.related-item {
+    display: block;
+    text-decoration: none;
+    background: var(--c-light);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: 0.3s;
+}
+
+.related-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.related-thumb img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+}
+
+.related-info {
+    padding: 15px;
+}
+
+.related-info h4 {
+    font-size: 1rem;
+    color: var(--c-dark);
+    margin: 0 0 8px;
+    line-height: 1.4;
+}
+
+.related-info span {
+    font-size: 0.8rem;
+    color: #94a3b8;
+}
+
+/* =========================================
+   8. سایدبار و ویجت‌ها
+   ========================================= */
+.cuttlas-sticky-inner {
+    position: sticky;
+    top: 30px;
+}
+
+.sidebar-widgets-area .widget {
+    background: var(--c-white);
+    padding: 30px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    margin-bottom: 30px;
+}
+
+.sidebar-widgets-area .widget-title {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    color: var(--c-dark);
+    border-bottom: 2px solid var(--c-light);
+    padding-bottom: 10px;
+}
+
+/* ویجت فهرست مطالب (TOC) */
+.cuttlas-toc-widget .widget-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    color: var(--c-dark);
+}
+
+.cuttlas-toc-widget h3 {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.cuttlas-toc-widget ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-right: 2px solid var(--c-light);
+}
+
+.cuttlas-toc-widget li {
+    position: relative;
+}
+
+.cuttlas-toc-widget a {
+    display: block;
+    padding: 8px 15px 8px 0;
+    color: #64748b;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: 0.2s;
+    border-right: 2px solid transparent;
+    margin-right: -2px;
+    /* برای همپوشانی با بوردر اصلی */
+}
+
+.cuttlas-toc-widget a:hover,
+.cuttlas-toc-widget a.active {
+    color: var(--c-primary);
+    border-right-color: var(--c-primary);
+    background: linear-gradient(to left, #fff, #f1f5f9);
+}
+
+/* =========================================
+   9. استایل اختصاصی کامنت‌ها (Overriding WP)
+   ========================================= */
+.cuttlas-comments-wrapper h3 {
+    margin-bottom: 30px;
+}
+
+/* فرم ارسال نظر */
+.comment-respond {
+    background: var(--c-light);
+    padding: 30px;
+    border-radius: var(--radius-md);
+    margin-bottom: 40px;
+}
+
+.comment-reply-title {
+    font-size: 1.2rem;
+    color: var(--c-dark);
+    margin-bottom: 20px;
+    display: block;
+}
+
+.comment-form p {
+    margin-bottom: 15px;
+}
+
+.comment-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+    color: var(--c-text);
+}
+
+.comment-form input[type="text"],
+.comment-form input[type="email"],
+.comment-form textarea {
+    width: 100%;
+    border: 1px solid var(--c-border);
+    border-radius: 8px;
+    padding: 12px;
+    font-family: inherit;
+    transition: 0.3s;
+}
+
+.comment-form input:focus,
+.comment-form textarea:focus {
+    border-color: var(--c-primary);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.form-submit .submit {
+    background: var(--c-primary);
+    color: #fff;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.form-submit .submit:hover {
+    background: var(--c-secondary);
+    transform: translateY(-2px);
+}
+
+/* لیست نظرات */
+.comment-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.comment-list li.comment {
+    margin-bottom: 30px;
+    border-bottom: 1px solid var(--c-border);
+    padding-bottom: 30px;
+}
+
+.comment-list li.comment:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.comment-body {
+    display: flex;
+    gap: 20px;
+}
+
+.comment-author .avatar {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    border: 3px solid var(--c-light);
+}
+
+.comment-meta {
+    margin-bottom: 10px;
+}
+
+.fn {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: var(--c-dark);
+    margin-left: 10px;
+}
+
+.comment-metadata {
+    font-size: 0.8rem;
+    color: #94a3b8;
+    display: inline-block;
+}
+
+.comment-metadata a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.comment-content p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.reply .comment-reply-link {
+    color: var(--c-primary);
+    font-size: 0.85rem;
+    font-weight: bold;
+    text-decoration: none;
+    border: 1px solid var(--c-primary);
+    padding: 4px 12px;
+    border-radius: 20px;
+    transition: 0.2s;
+}
+
+.reply .comment-reply-link:hover {
+    background: var(--c-primary);
+    color: #fff;
+}
+
+/* نظرات تودرتو */
+.comment-list .children {
+    list-style: none;
+    padding-right: 60px;
+    border-right: 2px solid var(--c-light);
+    margin-top: 30px;
+}
+
+/* =========================================
+   10. ریسپانسیو
+   ========================================= */
+@media (max-width: 992px) {
+    .cuttlas-grid-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .cuttlas-sidebar-column {
+        order: 2;
+    }
+
+    /* سایدبار برود پایین */
+    .cuttlas-hero-image {
+        height: 300px;
+        margin-bottom: -40px;
+    }
+
+    .cuttlas-card {
+        padding: 25px;
+    }
+
+    .post-title {
+        font-size: 1.8rem;
+    }
+
+    .cuttlas-author-box {
+        flex-direction: column;
+        text-align: center;
+    }
+}

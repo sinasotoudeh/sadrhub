@@ -1,0 +1,311 @@
+/*
+Sadrhub
+Author: Sina Sotoudeh
+Website: sinasotoudeh.ir
+github: github.com/sinasotoudeh
+*/
+/* =========================================
+   1. متغیرهای تم Cuttlas (تنظیم رنگ‌ها)
+   ========================================= */
+:root {
+    --cuttlas-primary: #4f46e5;
+    /* رنگ اصلی (بنفش ایندیگو) */
+    --cuttlas-primary-dark: #3730a3;
+    /* رنگ هاور */
+    --cuttlas-accent: #818cf8;
+    /* رنگ‌های فرعی */
+    --cuttlas-text-dark: #1f2937;
+    /* متن تیره */
+    --cuttlas-text-light: #ffffff;
+    /* متن روشن */
+    --cuttlas-bg-light: #f9fafb;
+    /* پس‌زمینه روشن */
+    --cuttlas-border: #e5e7eb;
+    /* رنگ بوردر */
+    --cuttlas-radius: 1.5rem;
+    /* گردی گوشه‌ها */
+    --cuttlas-shadow: 0 10px 30px -5px rgba(79, 70, 229, 0.15);
+    /* سایه نرم */
+}
+
+/* کانتینر اصلی هیرو */
+.cuttlas-blog-hero-container {
+    width: 100%;
+    max-width: 1280px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    box-sizing: border-box;
+    margin-top: 100px;
+
+}
+
+.cuttlas-hero-wrapper {
+    display: flex;
+    gap: 1.5rem;
+    height: 550px;
+    /* ارتفاع ثابت برای دسکتاپ */
+    overflow: hidden;
+}
+
+/* =========================================
+   2. استایل بخش اصلی (Main Stage - سمت راست)
+   ========================================= */
+.cuttlas-main-stage {
+    flex: 3;
+    /* 75% فضا */
+    position: relative;
+    border-radius: var(--cuttlas-radius);
+    overflow: hidden;
+    background-color: #e0e7ff;
+    /* رنگ پیش‌فرض قبل از لود عکس */
+    box-shadow: var(--cuttlas-shadow);
+}
+
+.cuttlas-main-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.6s ease-in-out, visibility 0.6s;
+    z-index: 1;
+}
+
+.cuttlas-main-item.active {
+    opacity: 1;
+    visibility: visible;
+    z-index: 2;
+}
+
+/* پس‌زمینه عکس */
+.cuttlas-main-bg {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: transform 6s ease;
+    /* افکت زوم آرام */
+}
+
+.cuttlas-main-item.active .cuttlas-main-bg {
+    transform: scale(1.05);
+    /* زوم شدن عکس وقتی فعال است */
+}
+
+/* محتوای متنی روی عکس */
+.cuttlas-main-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 3rem;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 100%);
+    color: var(--cuttlas-text-light);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+
+.cuttlas-cat-badge {
+    background-color: var(--cuttlas-primary);
+    color: #fff;
+    padding: 0.4rem 1rem;
+    border-radius: 2rem;
+    font-size: 0.85rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.cuttlas-main-title {
+    margin: 0 0 1rem 0;
+    font-size: 2.2rem;
+    font-weight: 800;
+    line-height: 1.3;
+}
+
+.cuttlas-main-title a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.cuttlas-main-title a:hover {
+    color: var(--cuttlas-accent);
+}
+
+.cuttlas-meta span {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+/* =========================================
+   3. استایل سایدبار (Navigation - سمت چپ)
+   ========================================= */
+.cuttlas-sidebar-nav {
+    flex: 1;
+    /* 25% فضا */
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border-radius: var(--cuttlas-radius);
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--cuttlas-border);
+}
+
+.cuttlas-nav-header {
+    padding: 1.5rem;
+    background: var(--cuttlas-bg-light);
+    border-bottom: 1px solid var(--cuttlas-border);
+}
+
+.cuttlas-nav-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: var(--cuttlas-text-dark);
+    font-weight: 700;
+}
+
+.cuttlas-nav-list {
+    flex-grow: 1;
+    overflow-y: auto;
+    /* اسکرول اگر آیتم‌ها زیاد بود */
+    display: flex;
+    flex-direction: column;
+}
+
+/* آیتم‌های لیست */
+.cuttlas-nav-item {
+    position: relative;
+    padding: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-bottom: 1px solid var(--cuttlas-border);
+}
+
+.cuttlas-nav-item:last-child {
+    border-bottom: none;
+}
+
+.cuttlas-nav-item:hover {
+    background-color: var(--cuttlas-bg-light);
+}
+
+/* حالت فعال آیتم لیست */
+.cuttlas-nav-item.active {
+    background-color: #f5f3ff;
+    /* بنفش خیلی کمرنگ */
+}
+
+.cuttlas-nav-content h4 {
+    margin: 0 0 0.5rem 0;
+    font-size: 0.95rem;
+    color: var(--cuttlas-text-dark);
+    line-height: 1.4;
+    transition: color 0.3s;
+}
+
+.cuttlas-nav-item.active .cuttlas-nav-content h4 {
+    color: var(--cuttlas-primary);
+    font-weight: 700;
+}
+
+.cuttlas-nav-date {
+    font-size: 0.8rem;
+    color: #9ca3af;
+}
+
+/* نوار پیشرفت (Progress Bar) */
+.cuttlas-progress-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    /* برای راست چین RTL باید right: 0 باشد */
+    right: 0;
+    /* اگر سایت RTL است این خط را فعال کنید */
+    height: 3px;
+    background-color: var(--cuttlas-primary);
+    width: 0;
+    transition: width 0s;
+    /* توسط JS کنترل می‌شود */
+}
+
+.cuttlas-nav-item.active .cuttlas-progress-bar {
+    /* انیمیشن توسط JS و setInterval هندل می‌شود، اما اینجا استایل پایه است */
+    width: 0%;
+}
+
+/* =========================================
+   4. استایل گرید آرشیو (پایین صفحه)
+   ========================================= */
+.cuttlas-archive-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 4rem;
+}
+
+.cuttlas-post-card {
+    background: #fff;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid var(--cuttlas-border);
+}
+
+.cuttlas-post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.cuttlas-post-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.cuttlas-post-card h3 {
+    padding: 1rem 1rem 0.5rem;
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.cuttlas-post-card p {
+    padding: 0 1rem 1.5rem;
+    color: #6b7280;
+    font-size: 0.95rem;
+}
+
+/* =========================================
+   5. ریسپانسیو (موبایل و تبلت)
+   ========================================= */
+@media (max-width: 992px) {
+    .cuttlas-hero-wrapper {
+        flex-direction: column;
+        height: auto;
+        /* ارتفاع اتوماتیک در موبایل */
+    }
+
+    .cuttlas-main-stage {
+        height: 400px;
+        /* ارتفاع بخش عکس در موبایل */
+        flex: none;
+    }
+
+    .cuttlas-sidebar-nav {
+        flex: none;
+        max-height: 300px;
+        /* اسکرول در سایدبار موبایل */
+    }
+
+    .cuttlas-main-title {
+        font-size: 1.5rem;
+    }
+}
