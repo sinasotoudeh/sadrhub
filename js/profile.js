@@ -13,7 +13,7 @@ window.loginToPanel = function (storeUrl) {
         return;
     }
 
-    const url = `https://sadrhub.ir/papi/api/shop/sslogin?store=${encodeURIComponent(storeUrl)}&phone=${encodeURIComponent(phone)}`;
+    const url = `https://api.example.com/login?store=${encodeURIComponent(storeUrl)}&phone=${encodeURIComponent(phone)}`;
 
     // Opens the URL in a new tab
     window.open(url, '_blank');

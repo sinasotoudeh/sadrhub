@@ -71,7 +71,7 @@ function sadrhub_handle_send_otp() {
     $mobile = sanitize_text_field($_POST['mobile']);
 
     // آدرس دقیق طبق cURL اول
-    $endpoint = 'https://sadrhub.ir/papi/api/auth/cl-otp?Phone=' . $mobile;
+    $endpoint = 'https://api.example.com/cl-otp?Phone=' . $mobile;
 
     $response = wp_remote_post($endpoint,
      array(
@@ -142,7 +142,7 @@ function sadrhub_handle_verify_otp() {
     $mobile = sanitize_text_field($_POST['mobile']);
     $otp    = sanitize_text_field($_POST['otp']);
 
-    $endpoint = 'https://sadrhub.ir/papi/api/auth/cl-otp-verify?phone=' . $mobile . '&code=' . $otp;
+    $endpoint = 'https://api.example.com/otp-verify?phone=' . $mobile . '&code=' . $otp;
     error_log('fermi2'.$endpoint);
 
     // $body_data = json_encode([
@@ -329,7 +329,7 @@ function sadrhub_handle_check_domain() {
     error_log("--- START DOMAIN CHECK: " . $domain . " ---");
     $domain = $domain . '.sadrhub.ir';
 
-    $endpoint = 'https://sadrhub.ir/papi/api/shop/dom-lookup?domain=' . $domain;
+    $endpoint = 'https://api.example.com/dom-lookup?domain=' . $domain;
     error_log("Request URL: " . $endpoint);
 
     $response = wp_remote_get($endpoint, array(
@@ -406,7 +406,7 @@ if (empty($prevData)) {
 
     error_log(">>> FINAL JSON PAYLOAD TO API: " . $json_payload);
 
-    $endpoint = 'https://sadrhub.ir/papi/api/shop/new';
+    $endpoint = 'https://api.example.com/new';
 
     $response = wp_remote_post($endpoint, array(
         'method'    => 'POST',
@@ -483,7 +483,7 @@ function sadrhub_handle_get_user_stores() {
     $token  = isset($_COOKIE['token']) ? $_COOKIE['token'] : '';
 
     // آدرس API
-    $endpoint = 'https://sadrhub.ir/papi/api/shop/dom-lst-mob'; 
+    $endpoint = 'https://api.example.com/dom-lst'; 
     
     // ۱. آماده‌سازی کوکی‌ها
     $cookies_str = '';
